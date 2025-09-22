@@ -13,5 +13,6 @@ class Extract(Step):
     def execute(self, data=None):
         if self.data_source_type == DataSourceType.FILE:
             # Lire CSV avec Spark
+            # a corriger la ligne 16
             df = self.spark.read.option("header", True).option("inferSchema", True).csv(self.path)
         return df

@@ -44,3 +44,6 @@ class Transform(Step):
         df = df.filter(col("Habitat Type").isin("Swamps", "Mangroves"))
 
         return df
+
+
+# strategie pour enlever la logique du traitement de cette classe et le mettre dans un fonction a part et après pouvoir l'appeler ici

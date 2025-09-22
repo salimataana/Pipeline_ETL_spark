@@ -19,7 +19,7 @@ extract = Extract(
 transform = Transform(source_type=DataSourceType.FILE)
 load = Load(
     source_type=DataSourceType.FILE,
-    output_path=r"/home/salimata/Bureau/Result_Crocodile.csv"
+    output_path=r"/home/salimata/Bureau/Result_Crocodile"
 )
 
 # Création du pipeline
