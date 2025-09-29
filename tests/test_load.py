@@ -26,7 +26,7 @@ class TestLoadStepSimple(unittest.TestCase):
 
     def test_execute_returns_df(self):
         # Créer l'instance Load avec un chemin fictif
-        load_step = Load(source_type=DataSourceType.FILE, output_path="ana_path")
+        load_step = Load(source_type=DataSourceType.FILE, output_path="/home/salimata/ana_path")
 
         # Appeler execute()
         result_df = load_step.execute(self.test_df)
