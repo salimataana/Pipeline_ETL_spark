@@ -1,0 +1,49 @@
+import unittest
+import os
+from pyspark.sql import SparkSession
+from cores.utils import DataSourceType
+from cores.extract import Extract
+
+
+class TestExtract(unittest.TestCase):
+
+    @classmethod
+    def setUpClass(cls):
+        # 1 SparkSession pour les tests
+        cls.spark = SparkSession.builder \
+            .master("local[1]") \
+            .appName("ExtractUnitTest") \
+            .getOrCreate()
+
+        # 2️⃣ Créer un petit fichier CSV temporaire pour le test
+        cls.test_csv_path = "test_data.csv"
+        with open(cls.test_csv_path, "w") as f:
+            f.write("name,age\nAlice,30\nBob,25\n")
+
+    @classmethod
+    def tearDownClass(cls):
+        # 5 Nettoie après tous les tests
+        cls.spark.stop()
+        if os.path.exists(cls.test_csv_path):
+            os.remove(cls.test_csv_path)
+
+    def test_extract_csv(self):
+        # instancie la classe Extract avec le fichier CSV
+        extract_step = Extract(source_type=DataSourceType.FILE, path=self.test_csv_path, spark=self.spark)
+
+        # 4️Executer la méthode
+        df = extract_step.execute()
+
+        # Verofier que le DataFrame est correct
+        self.assertEqual(df.count(), 2)  # 2 lignes
+        self.assertEqual(len(df.columns), 2)  # 2 colonnes
+        self.assertListEqual(df.columns, ["name", "age"])
+
+        # Vérifier quelques valeurs
+        data = df.collect()
+        self.assertEqual(data[0]["name"], "Alice")
+        self.assertEqual(data[1]["age"], 25)
+
+
+if __name__ == "__main__":
+    unittest.main()
