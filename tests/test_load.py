@@ -1,6 +1,6 @@
 import unittest
 from pyspark.sql import SparkSession, Row
-from cores.utils import DataSourceType
+from cores.utils import FileType
 from cores.load import Load  # adapte le nom du fichier si nécessaire
 
 
@@ -26,7 +26,7 @@ class TestLoadStepSimple(unittest.TestCase):
 
     def test_execute_returns_df(self):
         # Créer l'instance Load avec un chemin fictif
-        load_step = Load(source_type=DataSourceType.FILE, output_path="/home/salimata/ana_path")
+        load_step = Load(file_type=FileType.CSV, output_path="/home/salimata/ana_path")
 
         # Appeler execute()
         result_df = load_step.execute(self.test_df)

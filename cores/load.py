@@ -1,11 +1,12 @@
 from cores.step import Step
-from cores.utils import DataSourceType
+from cores.utils import DataSourceType, FileType
+
 
 class Load(Step):
 
-    def __init__(self, source_type: DataSourceType, output_path):
+    def __init__(self, file_type: FileType, output_path):
         self.kind = "load"
-        self.data_source_type = source_type
+        self.file_type= file_type
         self.output_path = output_path
 
     def execute(self, df):

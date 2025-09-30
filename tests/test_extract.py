@@ -1,7 +1,7 @@
 import unittest
 import os
 from pyspark.sql import SparkSession
-from cores.utils import DataSourceType
+from cores.utils import DataSourceType, FileType
 from cores.extract import Extract
 
 
@@ -29,7 +29,7 @@ class TestExtract(unittest.TestCase):
 
     def test_extract_csv(self):
         # instancie la classe Extract avec le fichier CSV
-        extract_step = Extract(source_type=DataSourceType.FILE, path=self.test_csv_path, spark=self.spark)
+        extract_step = Extract(file_type=FileType.CSV,path=self.test_csv_path, spark=self.spark)
 
         # 4️Executer la méthode
         df = extract_step.execute()
@@ -43,6 +43,8 @@ class TestExtract(unittest.TestCase):
         data = df.collect()
         self.assertEqual(data[0]["name"], "Alice")
         self.assertEqual(data[1]["age"], 25)
+
+# Selectionner la ligne de bob et Alice en faisant un requete sql ou function where
 
 
 if __name__ == "__main__":
