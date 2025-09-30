@@ -3,6 +3,7 @@ import os
 from pyspark.sql import SparkSession
 from cores.utils import DataSourceType, FileType
 from cores.extract import Extract
+from main import spark
 
 
 class TestExtract(unittest.TestCase):
@@ -34,17 +35,17 @@ class TestExtract(unittest.TestCase):
         # 4️Executer la méthode
         df = extract_step.execute()
 
-        # Verofier que le DataFrame est correct
+        # Verifier que le DataFrame est correct
         self.assertEqual(df.count(), 2)  # 2 lignes
         self.assertEqual(len(df.columns), 2)  # 2 colonnes
         self.assertListEqual(df.columns, ["name", "age"])
 
-        # Vérifier quelques valeurs
-        data = df.collect()
-        self.assertEqual(data[0]["name"], "Alice")
-        self.assertEqual(data[1]["age"], 25)
+        result = df.where(df.name.isin("Alice", "Bob")).collect()
+        # Vérifier les valeurs
+        self.assertEqual(result[0]["name"], "Alice")
+        self.assertEqual(result[1]["name"], "Bob")
+        self.assertEqual(int(result[1]["age"]), 25)
 
-# Selectionner la ligne de bob et Alice en faisant un requete sql ou function where
 
 
 if __name__ == "__main__":

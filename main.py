@@ -2,7 +2,7 @@ from pyspark.sql import SparkSession
 from cores.extract import Extract
 from cores.transform import Transform
 from cores.load import Load
-from cores.utils import DataSourceType
+from cores.utils import FileType
 from pipeline import Pipeline
 
 # 1 créer la SparkSession
@@ -12,13 +12,13 @@ spark = SparkSession.builder \
 
 # Étapes du pipeline pour un seul fichier
 extract = Extract(
-    source_type=DataSourceType.FILE,
+    file_type=FileType.CSV,
     path=r"/home/salimata/Bureau/crocodile_dataset.csv",
     spark=spark
 )
-transform = Transform(source_type=DataSourceType.FILE)
+transform = Transform(file_type=FileType.CSV)
 load = Load(
-    source_type=DataSourceType.FILE,
+    file_type=FileType.CSV,
     output_path=r"/home/salimata/Bureau/Result_Crocodile"
 )
 
