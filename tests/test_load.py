@@ -1,7 +1,7 @@
 import unittest
 from pyspark.sql import SparkSession, Row
 from cores.utils import FileType
-from cores.load import Load  # adapte le nom du fichier si nécessaire
+from cores.load_csv import Load  # adapte le nom du fichier si nécessaire
 
 
 class TestLoadStepSimple(unittest.TestCase):

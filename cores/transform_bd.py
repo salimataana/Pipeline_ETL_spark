@@ -10,15 +10,15 @@ def transform_base_de_donnes(dataf: DataFrame) -> DataFrame:
     - Trier par âge décroissant
     """
     # 1️⃣ Filtrer les personnes âgées de plus de 30 ans
-    dataf_transformed = dataf.filter(col("age") > 30)
+    dataf = dataf.filter(col("age") > 30)
 
     # 2️⃣ Ajouter une colonne "age_in_5_years"
-    dataf_transformed = dataf_transformed.withColumn("age_in_5_years", col("age") + 5)
+    dataf = dataf.withColumn("age_in_5_years", col("age") + 5)
 
     # 3️⃣ Transformer les noms en majuscules
-    dataf_transformed = dataf_transformed.withColumn("name", upper(col("name")))
+    dataf = dataf.withColumn("name", upper(col("name")))
 
     # 4️⃣ Trier par âge décroissant
-    dataf_transformed = dataf_transformed.orderBy(col("age").desc())
+    dataf = dataf.orderBy(col("age").desc())
 
-    return dataf_transformed
+    return dataf

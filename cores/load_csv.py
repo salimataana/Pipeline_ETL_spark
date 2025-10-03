@@ -9,9 +9,9 @@ class Load(Step):
         self.file_type= file_type
         self.output_path = output_path
 
-    def execute(self, df_transformed):
+    def execute(self, df):
         # On va écrire le DataFrame Spark  en CSV pour la sortie
-        df_transformed.write.mode("overwrite").option("header", True).csv(self.output_path)
+        df.write.mode("overwrite").option("header", True).csv(self.output_path)
 
         print(f"Données enregistrées dans : {self.output_path}")
-        return df_transformed
+        return df
