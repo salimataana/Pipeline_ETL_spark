@@ -1,9 +1,9 @@
 import unittest
 import os
 from pyspark.sql import SparkSession
-from cores.utils import DataSourceType, FileType
+from cores.utils import FileType
 from cores.extract_csv import Extract
-from main import spark
+
 
 
 class TestExtract(unittest.TestCase):
