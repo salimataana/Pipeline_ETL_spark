@@ -1,7 +1,7 @@
 from pyspark.sql import DataFrame
 from cores.step import Step
 from cores.transform_csv import transform_dataframe
-from cores.utils import FileType
+
 
 
 class TransformCSV(Step):

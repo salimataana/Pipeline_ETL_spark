@@ -1,7 +1,7 @@
 from pyspark.sql import DataFrame
 from cores.step import Step
 from cores.transform_bd import transform_base_de_donnes
-from cores.utils import FileType
+
 
 class TransformBD(Step):
 
