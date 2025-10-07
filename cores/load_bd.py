@@ -10,7 +10,7 @@ class LoadBD(Step):
         self.output_path = output_path
 
     def execute(self, dataf_transformed):
-        # On va écrire le DataFrame Spark  en CSV pour la sortie
+        # On va écrire le DataFrame Spark en json pour la sortie
         dataf_transformed.write.mode("overwrite").json(self.output_path)
 
         print(f"Données enregistrées dans : {self.output_path}")
