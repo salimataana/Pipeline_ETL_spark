@@ -1,9 +1,8 @@
-from typing import Dict
 
 from pyspark.sql import SparkSession
 from cores.step import Step
 from cores.utils import FileType
-import os  # pour dvoir l'extension agir avec notre SE
+
 
 class Extract(Step):
 
