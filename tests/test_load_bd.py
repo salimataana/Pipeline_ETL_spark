@@ -1,6 +1,5 @@
 import unittest
-import shutil
-import os
+import tempfile
 from pyspark.sql import SparkSession, Row
 from cores.load_bd import LoadBD
 from cores.utils import FileType
@@ -28,17 +27,13 @@ class TestLoadBD(unittest.TestCase):
         ]
         self.df = self.spark.createDataFrame(data)
 
-        # Dossier temporaire pour le test (dans ton chemin spécifique)
-        self.test_output = "/home/salimata/ana_path/test_output_loadbd"
-
-        # Supprime le dossier s’il existe déjà
-        if os.path.exists(self.test_output):
-            shutil.rmtree(self.test_output)
+        # Crée un dossier temporaire pour le test
+        self.temp_dir = tempfile.TemporaryDirectory()
+        self.test_output = self.temp_dir.name
 
     def tearDown(self):
-        # Nettoyage du dossier après chaque test
-        if os.path.exists(self.test_output):
-            shutil.rmtree(self.test_output)
+        # Nettoyage du dossier temporaire après chaque test
+        self.temp_dir.cleanup()
 
     def test_execute(self):
         # Instancie LoadBD
@@ -51,7 +46,9 @@ class TestLoadBD(unittest.TestCase):
         self.assertEqual(df_result.collect(), self.df.collect())
 
         # Vérifie que le dossier de sortie a été créé
+        import os
         self.assertTrue(os.path.exists(self.test_output))
+
 
 if __name__ == "__main__":
     unittest.main()
