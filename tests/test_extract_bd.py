@@ -3,7 +3,7 @@ from pyspark.sql import DataFrame
 from cores.extract_bd import ExtractDB
 
 class TestExtractDBSimple:
-    def test_execute_with_data_parameter_ignored(self):
+    def test_execute_with_data_bd(self):
         """Test que le paramètre data est ignoré (non utilisé dans cette classe)"""
         # Given
         spark_mock = MagicMock()
