@@ -11,7 +11,9 @@ class Load(Step):
 
     def execute(self, df):
         # On va écrire le DataFrame Spark  en CSV pour la sortie
+        # Écriture du DataFrame en CSV :
+        # - mode "overwrite" : écrase le fichier si il existe déjà
+        # - option "header=True" : inclut les noms de colonnes dans le CSV
         df.write.mode("overwrite").option("header", True).csv(self.output_path)
-
         print(f"Données enregistrées dans : {self.output_path}")
         return df
