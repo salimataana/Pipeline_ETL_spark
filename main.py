@@ -1,8 +1,7 @@
 from pyspark.sql import SparkSession
 from cores.extract_csv import Extract
 from cores.load_bd import LoadBD
-from cores.transform_main_bd import TransformBD
-from cores.transform_main_csv import TransformCSV
+from cores.transform_main import TransformBD, TransformCSV
 from cores.load_csv import Load
 from cores.utils import FileType
 from pipeline import Pipeline

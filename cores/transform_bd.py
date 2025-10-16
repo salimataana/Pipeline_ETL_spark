@@ -9,16 +9,16 @@ def transform_base_de_donnes(dataf: DataFrame) -> DataFrame:
     - Mettre les noms en majuscules
     - Trier par âge décroissant
     """
-    # 1️⃣ Filtrer les personnes âgées de plus de 30 ans
+    # Filtrer les personnes âgées de plus de 30 ans
     dataf = dataf.filter(col("age") > 30)
 
-    # 2️⃣ Ajouter une colonne "age_in_5_years"
+    # Ajouter une colonne "age_in_5_years"
     dataf = dataf.withColumn("age_in_5_years", col("age") + 5)
 
-    # 3️⃣ Transformer les noms en majuscules
+    #  Transformer les noms en majuscules
     dataf = dataf.withColumn("name", upper(col("name")))
 
-    # 4️⃣ Trier par âge décroissant
+    #  Trier par âge décroissant
     dataf = dataf.orderBy(col("age").desc())
 
     return dataf
